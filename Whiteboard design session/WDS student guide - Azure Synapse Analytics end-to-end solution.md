@@ -296,5 +296,5 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Result set caching |  https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/performance-tuning-result-set-caching?view=sql-server-ver15 |
 | Overview of Tables in Synapse Analytics | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-overview?view=sql-server-ver15 |
 | Workload Management | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-workload-management?view=sql-server-ver15 |
-| Intro to Azure Data Lake Store gen2 | https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction |
+| Intro to Azure Data Lake Store Gen2 | https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction |
 | Azure Stream Analytics | https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction |
