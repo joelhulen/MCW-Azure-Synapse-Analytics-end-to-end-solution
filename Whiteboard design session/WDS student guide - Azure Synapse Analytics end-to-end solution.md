@@ -104,7 +104,7 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 7. Concerned about performance, must make sure core approaches for best performance of the solution are well understood.
 
-8. Need a solution that provides a consistent security model across all components.
+8. Create a solution that provides a consistent security model across all components.
 
 ### Customer objections
 
