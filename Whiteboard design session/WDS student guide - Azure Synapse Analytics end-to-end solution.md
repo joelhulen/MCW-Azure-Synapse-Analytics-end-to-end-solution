@@ -280,8 +280,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Additional references
 
-|                                 |                                                                                                    |
-| ------------------------------- | :------------------------------------------------------------------------------------------------: |
+|                               |                                                                                                |
+|-------------------------------|------------------------------------------------------------------------------------------------|
 | **Description** | **Links** |
 | What is Azure Synapse Analytics  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is  |
 | Cheat sheet for Azure Synapse Analytics solutions  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/cheat-sheet  |
