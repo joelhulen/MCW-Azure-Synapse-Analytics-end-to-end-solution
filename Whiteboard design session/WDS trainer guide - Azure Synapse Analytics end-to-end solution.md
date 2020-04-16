@@ -170,7 +170,9 @@ When participants are doing activities, you can **look ahead to refresh your mem
 
 ## Abstract and learning objectives
 
-This workshop will challenge students to know about the breadth of functionality available within Azure Synapse Analytics, as well as to learn how to best configure a comprehensive advanced analytics solution for an enterprise customer in the retail space.
+In this whiteboard design session, you will work in a group to look at the process of designing an end-to-end solution using Azure Synapse Analytics. The design session will cover data loading, data preparation, data transformation and data serving, along with performing machine learning and handling of both batch and real-time data.
+
+At the end of this whiteboard design session, you will be better able to design and build a complete end-to-end advanced analytics solution using Azure Synapse Analytics.
 
 ## Step 1: Review the customer case study
 
@@ -220,11 +222,11 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 4. Enable business analysts and data science/data engineering teams to share a single source of truth.
 
-5. They would like to minimize the number of disparate services they use across ingest, transformation, querying and storage, so that their team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring.
+5. Minimize the number of disparate services they use across ingest, transformation, querying and storage, so that teams of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring.
 
-6. They prefer to accomplish this working within a single collaborative environment.
+6. Work within a single collaborative environment.
 
-7. They have concerns about performance, and want to make sure they can understand the core approaches they should take to ensure the best performance of the solution recommended.
+7. Concerned about performance, must make sure core approaches for best performance of the solution are well understood.
 
 8. Need a solution that provides a consistent security model across all components.
 
@@ -232,15 +234,15 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 1. WWI understands that Azure offers several services with overlapping capabilities.  They do not want to spend the time stitching them together to get to the desired analytics solution.
 
-2. They have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
+2. WWI have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
 
-3. Can they really minimize the number of disparate services they use across ingest, transformation, querying and storage, so that their team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
+3. Is it really possible to minimize the number of disparate services they use across ingest, transformation, querying and storage, so that WWI team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
 
-4. They have heard of serverless querying, does your solution offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting their dashboards or reports?
+4. WWI have heard of serverless querying, does Azure offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting WWI dashboards or reports?
 
-5. If their solution provides serverless querying, are they prevented from using pre-allocated query resources?
+5. If Azure provides serverless querying, does selecting serverless remove the option of using pre-allocated query resources?
 
-6. Is my data protected at rest and do I have control over the keys used to encrypt it?
+6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
 ### Infographic for common scenarios
 
@@ -314,6 +316,8 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
     - Their data engineers sometimes use temporary staging tables in their data preparation.
 
+    - They have lookup tables that range from several hundred MBs to 1.5 GBs
+
 7. Some of their data contains columns in the JSON format, how could they flatten these hierarchical fields to a tabular structure?
 
 8. What approach can they use to update the JSON data?
@@ -334,7 +338,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. In previous efforts, WWI systems struggled with their own popularity. Exploratory queries that were not time sensitive would saturate the available resources and delay the execution of higher priority queries supporting critical reports. Explain how your solution helps to resolve this.
 
-2. What does your solution provide to WWI to help them identify issues such as suboptimal table distribution, data skew, cache misses, `tempdb` contention and suboptimal plan selection?
+2. What does your solution provide to WWI to help them identify issues such as suboptimal table distribution, data skew, cache misses, tempdb contention and suboptimal plan selection?
 
 3. WWI recognizes there is a balance between the data warehouse software staying up to date and when they can afford downtime that might result. How can they establish their preferences with your solution so they are never caught off guard with an upgrade?
 
@@ -342,7 +346,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. How does your solution provide unified authentication, such as across SQL and Spark workloads?
 
-2. How is access to data authorized for data stored in Azure Data Lake Store gen 2? In Azure Synapse SQL databases?
+2. How is access to data authorized for data stored in Azure Data Lake Store Gen2? In Azure Synapse SQL databases?
 
 3. One of WWI's challenges is that while multiple departments might be able to query a given table, what data they should be allowed to see depends on their department or role within the company. How could your solution support this? You should suggest three options.
 
@@ -398,8 +402,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Additional references
 
-|    |            |
-|----------|:-------------:|
+|                                 |                                                                                                    |
+| ------------------------------- | :------------------------------------------------------------------------------------------------: |
 | **Description** | **Links** |
 | What is Azure Synapse Analytics  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is  |
 | Cheat sheet for Azure Synapse Analytics solutions  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/cheat-sheet  |
@@ -471,62 +475,77 @@ The primary audience is the business decision makers and technology decision mak
 
 1. Diagram your initial vision for handling the top-level requirements for data loading, data transformation, storage, machine learning modeling, and reporting.
 
-    * The following diagram illustrates the high level process for the "cold path" of the data pipeline architecture. It begins with ingesting the data from the Oracle, SAP Hana and Teradata sources. This can be done within Azure Synapse Analytics using Azure Synapse Pipelines containing the Copy Data activity, which lands the data in Azure Data Lake gen 2. When performing initial exploration of the data in the data lake, the data can be readily explored using Azure Synapse SQL to explore it with T-SQL or using Azure Synapse Spark to explore it within notebooks. 
-    * At this stage Mapping Data Flows, which are Synapse Pipeline activities just like the Copy Data activity, can be created using the graphical designer to perform some data preparation tasks. 
-    * Next, the data can be transformed and enriched in several ways. 
-    * Azure Synapse SQL offers both serverless and provisioned resource models, offering consumption and billing options to fit the customer's needs. For predictable performance and cost, provision pools to reserve processing power for data stored in SQL tables. For ad hoc or bursty workloads, use the serverless, always-available SQL endpoint. 
-    * Azure Synapse SQL Pools and the Azure Synapse SQL serverless endpoint can be used to apply transformations using T-SQL, as can notebooks running in Azure Synapse Spark. A Synapse Pipeline is also commonly used at this stage to define a repeatable process for cleaning, joining, enriching and ultimately loading the data into the Azure Synapse SQL that functions as the serving database. 
-    * The serving layer can consist of a dedicated Azure Synapse SQL Pool to provide pre-provisioned compute capacity to serve both data from the relational data warehouse or data sourced from the data lake. Additionally, the serving layer can use Azure Synapse SQL serverless to provide ad-hoc compute capacity for querying data stored in the data lake. Either of these serving options can be used by Power BI reports created within Azure Synapse Analytics, or by external applications. The important take away from this architecture is that all of the components shown are completely managed within Azure Synapse Analytics.
+    The following diagram illustrates the high level process for the "cold path" of the data pipeline architecture. It begins with ingesting the data from the Oracle, SAP Hana and Teradata sources. This can be done within Azure Synapse Analytics using Azure Synapse Pipelines containing the Copy Data activity, which lands the data in Azure Data Lake Gen2. When performing initial exploration of the data in the data lake, the data can be readily explored using Azure Synapse SQL to explore it with T-SQL or using Azure Synapse Spark to explore it within notebooks. 
+
+    At this stage Mapping Data Flows, which are Synapse Pipeline activities just like the Copy Data activity, can be created using the graphical designer to perform some data preparation tasks. 
+
+    Next, the data can be transformed and enriched in several ways. 
+
+    Azure Synapse SQL offers both serverless and provisioned resource models, offering consumption and billing options to fit the customer's needs. For predictable performance and cost, provision pools to reserve processing power for data stored in SQL tables. For ad hoc or bursty workloads, use the serverless, always-available SQL endpoint. 
+
+    Azure Synapse SQL Pools and the Azure Synapse SQL serverless endpoint can be used to apply transformations using T-SQL, as can notebooks running in Azure Synapse Spark. A Synapse Pipeline is also commonly used at this stage to define a repeatable process for cleaning, joining, enriching and ultimately loading the data into the Azure Synapse SQL that functions as the serving database. 
+
+    The serving layer can consist of a dedicated Azure Synapse SQL Pool to provide pre-provisioned compute capacity to serve both data from the relational data warehouse or data sourced from the data lake. Additionally, the serving layer can use Azure Synapse SQL serverless to provide ad-hoc compute capacity for querying data stored in the data lake. Either of these serving options can be used by Power BI reports created within Azure Synapse Analytics, or by external applications. The important take away from this architecture is that all of the components shown are completely managed within Azure Synapse Analytics.
+
     ![High level architecture](media/preferred-solution.png)
-    * The following diagram illustrates how they could handle the streaming data, the "hot path". Twitter tweet data needs to be pulled using a WebJob. This WebJob would load the tweets into Event Hubs so that they could be processed reliably using Stream Analytics. Stream Analytics can be used both to archive all tweets to the data lake for offline or batch analysis using Azure Synapse SQL provisioned within Azure Synapse Analytics, as well as to send live data to Power BI reports for real-time dashboards and reports. The in-store IoT sensors could ingest their data into IoT Hub directly, and by integrating with IoT Hub also benefit from the device management capabilities that IoT Hub enables. Ultimately this data would also be processed by another Stream Analytics job and served in the same way as the tweets.
+    
+    The following diagram illustrates how they could handle the streaming data, the "hot path". Twitter tweet data needs to be pulled using a WebJob. This WebJob would load the tweets into Event Hubs so that they could be processed reliably using Stream Analytics. Stream Analytics can be used both to archive all tweets to the data lake for offline or batch analysis using Azure Synapse SQL provisioned within Azure Synapse Analytics, as well as to send live data to Power BI reports for real-time dashboards and reports. The in-store IoT sensors could ingest their data into IoT Hub directly, and by integrating with IoT Hub also benefit from the device management capabilities that IoT Hub enables. Ultimately this data would also be processed by another Stream Analytics job and served in the same way as the tweets.
+
     ![High level architecture](media/preferred-solution-streaming.png)
-    * The following diagram illustrates the approach the Azure Synapse Analytics enables for WWI with regards to machine learning. WWI could train their machine learning models using notebooks run within Azure Machine Learning or Azure Synapse Spark. They could use their machine learning framework of choice to do so. Within this notebook they would convert the model into the ONNX format and then upload the model to Azure Storage. From there, they would run a T-SQL script in Azure Synapse SQL to load the model into a table in the database. After this, they can use the model within T-SQL scripts running Azure Synapse SQL by loading the model from the table, and using it with the Predict function to score data sourced from a table in the database. The scored results could then be used directly or be inserted into a target table for later querying of the predictions.
+
+    The following diagram illustrates the approach the Azure Synapse Analytics enables for WWI with regards to machine learning. WWI could train their machine learning models using notebooks run within Azure Machine Learning or Azure Synapse Spark. They could use their machine learning framework of choice to do so. Within this notebook they would convert the model into the ONNX format and then upload the model to Azure Storage. From there, they would run a T-SQL script in Azure Synapse SQL to load the model into a table in the database. After this, they can use the model within T-SQL scripts running Azure Synapse SQL by loading the model from the table, and using it with the Predict function to score data sourced from a table in the database. The scored results could then be used directly or be inserted into a target table for later querying of the predictions.
+
     ![High level architecture](media/preferred-solution-machine-learning.png)
 
 *Ingest & Store*
 
 1. For the solution you recommend, what specific approach would you say to WWI is the most efficient way for moving flat file data from the ingest storage locations to the data lake?
 
-   - They should follow the pattern of landing data in the data lake first, then ingest from the flat files into relational tables within the data warehouse. They can create pipelines that extract the source data and store in Azure Data Lake Store gen 2 as Parquet files.
+    They should follow the pattern of landing data in the data lake first, then ingest from the flat files into relational tables within the data warehouse. They can create pipelines that extract the source data and store in Azure Data Lake Store Gen2 as Parquet files.
 
 2. What storage service would you recommend they use and how would you recommend they structure the folders so they can manage the data at the various levels of refinement?
 
-    - They should use Azure Data Lake Store (ADLS) gen 2 (Azure Storage with hierarchical file systems).
-    - In ADLS, it is a best practice to have a dedicated Storage Account for production, and a separate Storage Account for dev and test workloads. This will ensure that dev or test workloads never interfere with production.  
-    - One common folder structure is to organize the data in separate folders by degree of refinement. For example a bronze folder contains the raw data, silver contains the cleaned, prepared and integrated data and gold contains data ready to support analytics, which might include final refinements such as pre-computed aggregates.
+    They should use Azure Data Lake Store (ADLS) Gen2 (Azure Storage with hierarchical file systems).
+    
+    In ADLS, it is a best practice to have a dedicated Storage Account for production, and a separate Storage Account for dev and test workloads. This will ensure that dev or test workloads never interfere with production.  
+
+    One common folder structure is to organize the data in separate folders by degree of refinement. For example a bronze folder contains the raw data, silver contains the cleaned, prepared and integrated data and gold contains data ready to support analytics, which might include final refinements such as pre-computed aggregates.
 
 3. When it comes to ingesting raw data in batch from new data sources, what data formats could they support with your solution?
 
-    - CSV, Parquet, ORC, JSON  
+    CSV, Parquet, ORC, JSON  
 
 4. How will you ingest streaming data from the in-store IoT devices?
 
-    - They should collect messages in Event Hub or IoT Hub and process them with Stream Analytics.
+    They should collect messages in Event Hub or IoT Hub and process them with Stream Analytics.
 
 *Transform*
 
 1. Before building transformation pipelines or loading it into the data warehouse, how can WWI quickly explore the raw ingested data to understand its contents?
 
-    - Using Azure Synapse Studio, for any parquet files stored in ADLS, they can right click on a parquet file to query as SQL or as DataFrame in a notebook.
+    Using Azure Synapse Studio, for any parquet files stored in ADLS, they can right click on a parquet file to query as SQL or as DataFrame in a notebook.
 
 2. When it comes to storing refined versions of the data for possible querying, what data format would you recommend they use? Why?
 
-    - Parquet. There is industry alignment around the Parquet format for sharing data at the storage layer (e.g., across Hadoop, Databricks, and SQL engine scenarios). Parquet is a high-performance, column oriented format optimized for big data scenarios.
+    Parquet. There is industry alignment around the Parquet format for sharing data at the storage layer (e.g., across Hadoop, Databricks, and SQL engine scenarios). Parquet is a high-performance, column oriented format optimized for big data scenarios.
 
 3. Regarding the service you recommend they use for preparing, merging and transforming the data, in which situations can they use the graphical designer and which situations would require code?
 
-    - They could use Mapping Data Flows that they graphically design in Azure Synapse Studio. These code-free data flows provide for scalable execution. Data Flows define a domain specific language for transformation and convert that into code that runs on Spark, which runs at scale and provides elasticity for handling growing volumes of data.
-    - They can use code when their data engineers prefer to use Spark to transform the data via DataFrames.
+    They could use Mapping Data Flows that they graphically design in Azure Synapse Studio. These code-free data flows provide for scalable execution. Data Flows define a domain specific language for transformation and convert that into code that runs on Spark, which runs at scale and provides elasticity for handling growing volumes of data.
+
+    They can use code when their data engineers prefer to use Spark to transform the data via DataFrames.
 
 4. Their data team is accustomed to leveraging open source packages that help them quickly pre-process the data, as well as enable their data scientists to train machine learning models using both Spark and Python. Explain how your solution would enable this.
 
-    - Azure Synapse Analytics supports open source Apache Spark and the execution of Python, Scala and (in the near future) R code. Their data team would be able to use the familiar Jupyter notebooks and leverage their favorite libraries.
+    Azure Synapse Analytics supports open source Apache Spark and the execution of Python, Scala and (in the near future) R code. Their data team would be able to use the familiar Jupyter notebooks and leverage their favorite libraries.
 
 5. Does your solution allow their data engineers and data scientists to work within Jupyter notebooks? How are libraries managed?
 
-    - Azure Synapse Spark pools allow the importing of libraries during creation.
-    - These dependencies are specified using a PIP freeze formatted text document listing the desired library names and versions.
-    - The data team can then launch notebooks attached to the Azure Synapse Spark pool and author the code that uses their favorite libraries.  
+    Azure Synapse Spark pools allow the importing of libraries during creation.
+
+    These dependencies are specified using a PIP freeze formatted text document listing the desired library names and versions.
+
+    The data team can then launch notebooks attached to the Azure Synapse Spark pool and author the code that uses their favorite libraries.  
 
 *Query*
 
@@ -534,40 +553,43 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. What specific indexing techniques should they use to reach this kind of performance for their fact tables? Why?
 
-    - Clustered Columnstore Indexes. As they offer the highest level of data compression and best overall query performance, columnstore indexes are usually the best choice for large tables such as fact tables.
+    Clustered Columnstore Indexes. As they offer the highest level of data compression and best overall query performance, columnstore indexes are usually the best choice for large tables such as fact tables.
 
 2. Would you recommend the same approach for tables they have with less than 100 million rows?
 
-    - No. For "small" tables with less than 100 million rows, they should consider Heap tables.
+    No. For "small" tables with less than 100 million rows, they should consider Heap tables.
 
 3. How should they configure indexes on their smaller lookup tables (e.g., those that contain store names and addresses)?
 
-    - They should consider using Heap tables. For small lookup tables, less than 100 million rows, often heap tables make sense. Cluster columnstore tables begin to achieve optimal compression once there is more than 100 million rows.
+    They should consider using Heap tables. For small lookup tables, less than 100 million rows, often heap tables make sense. Cluster columnstore tables begin to achieve optimal compression once there is more than 100 million rows.
 
 4. What would you suggest for their larger lookup tables that are used just for point lookups that retrieve only a single row? How could they makes these more flexible so that queries filtering against different sets of columns would still yield efficient lookups?
 
-    - Use clustered indexes. Clustered indexes may outperform clustered columnstore tables when a single row needs to be quickly retrieved. For queries where a single or a very few number of rows to lookup is required to perform with extreme speed, consider a cluster index or non-clustered secondary index.
-    - The disadvantage to using a clustered index is that the only queries that benefit are the ones that use a highly selective filter on the clustered index column. To improve filter performance on other columns, a non-clustered index can be added to other columns.
-    - However, be aware that each index which is added to a table adds both space and processing time to data loads.
+    Use clustered indexes. Clustered indexes may outperform clustered columnstore tables when a single row needs to be quickly retrieved. For queries where a single or a very few number of rows to lookup is required to perform with extreme speed, consider a cluster index or non-clustered secondary index.
+
+    The disadvantage to using a clustered index is that the only queries that benefit are the ones that use a highly selective filter on the clustered index column. To improve filter performance on other columns, a non-clustered index can be added to other columns.
+
+    However, be aware that each index which is added to a table adds both space and processing time to data loads.
 
 5. What should they use for the fastest loading of staging tables?
 
-    - A heap table. If you are loading data only to stage it before running more transformations, loading the table to heap table is much faster than loading the data to a clustered columnstore table.
-    - A temporary table. Loading data to a temporary table loads faster than loading a table to permanent storage.
+    A heap table. If you are loading data only to stage it before running more transformations, loading the table to heap table is much faster than loading the data to a clustered columnstore table.
+
+    A temporary table. Loading data to a temporary table loads faster than loading a table to permanent storage.
   
 6. What are the typical issues they should look out for with regards to **distributed** table design for the following scenarios?
 
     - Their smallest fact table exceeds several GB’s and by their nature experiences frequent inserts.
 
-      - They should use a hash distribution.
+      They should use a hash distribution.
 
-      - A hash-distributed table distributes table rows across the Compute nodes by using a deterministic hash function to assign each row to one distribution.
+      A hash-distributed table distributes table rows across the Compute nodes by using a deterministic hash function to assign each row to one distribution.
 
-      - Since identical values always hash to the same distribution, the data warehouse has built-in knowledge of the row locations. SQL Data Warehouse uses this knowledge to minimize data movement during queries, which improves query performance.
+      Since identical values always hash to the same distribution, the data warehouse has built-in knowledge of the row locations. SQL Data Warehouse uses this knowledge to minimize data movement during queries, which improves query performance.
 
-      - Hash-distributed tables work well for large fact tables in a star schema. They can have very large numbers of rows and still achieve high performance.
+      Hash-distributed tables work well for large fact tables in a star schema. They can have very large numbers of rows and still achieve high performance.
 
-      - Consider using a hash-distributed table when:
+      Consider using a hash-distributed table when:
         - The table size on disk is more than 2 GB.
         - The table has frequent insert, update, and delete operations.
 
@@ -575,11 +597,11 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
       - They should consider round-robin distribution.
 
-      - A round-robin distributed table distributes table rows evenly across all distributions. The assignment of rows to distributions is random. Unlike hash-distributed tables, rows with equal values are not guaranteed to be assigned to the same distribution.
+        A round-robin distributed table distributes table rows evenly across all distributions. The assignment of rows to distributions is random. Unlike hash-distributed tables, rows with equal values are not guaranteed to be assigned to the same distribution.
 
-      - As a result, the system sometimes needs to invoke a data movement operation to better organize your data before it can resolve a query. This extra step can slow down your queries. For example, joining a round-robin table usually requires reshuffling the rows, which is a performance hit.
+        As a result, the system sometimes needs to invoke a data movement operation to better organize your data before it can resolve a query. This extra step can slow down your queries. For example, joining a round-robin table usually requires reshuffling the rows, which is a performance hit.
 
-      - Consider using the round-robin distribution for your table in the following scenarios:
+        Consider using the round-robin distribution for your table in the following scenarios:
 
         - When getting started as a simple starting point since  it is the default
         - If there is no obvious joining key
@@ -590,65 +612,71 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
     - Their data engineers sometimes use temporary staging tables in their data preparation.
 
-      - They should use a round-robin distributed table.
+        They should use a round-robin distributed table.
 
     - They have lookup tables that range from several hundred MBs to 1.5 GBs.
 
-      - They should consider using replicated tables.
-      - A replicated table has a full copy of the table accessible on each Compute node. Replicating a table removes the need to transfer data among Compute nodes before a join or aggregation. Since the table has multiple copies, replicated tables work best when the table size is less than 2 GB compressed.
+        They should consider using replicated tables.
+        A replicated table has a full copy of the table accessible on each Compute node. Replicating a table removes the need to transfer data among Compute nodes before a join or aggregation. Since the table has multiple copies, replicated tables work best when the table size is less than 2 GB compressed.
 
 7. Some of their data contains columns in the JSON format, how could they flatten these hierarchical fields to a tabular structure?
 
-   - They can use Azure Synapse SQL serverless along with the T-SQL OPENJSON, JSON_VALUE, and JSON_QUERY statements.
+     They can use Azure Synapse SQL serverless along with the T-SQL OPENJSON, JSON_VALUE, and JSON_QUERY statements.
 
 8. What approach can they use to update the JSON data?
 
-   - The can use JSON_MODIFY with the UPDATE statement.
+     The can use JSON_MODIFY with the UPDATE statement.
 
 9. In some of their queries, they are OK trading off speed of returning counts for a small reduction in accuracy. How might they do this?
 
-   - They should use the APPROXIMATE_COUNT_DISTINCT statement which uses the HyperLogLog to return a result with an average 2% accuracy of the true cardinality. For example, if COUNT(DISTINCT) returns 1,000,000, then with approximate execution you will get a value between 999,736 to 1,016,234.
+     They should use the APPROXIMATE_COUNT_DISTINCT statement which uses the HyperLogLog to return a result with an average 2% accuracy of the true cardinality. For example, if COUNT(DISTINCT) returns 1,000,000, then with approximate execution you will get a value between 999,736 to 1,016,234.
 
 10. Their downstream reports are used by many users, which often means the same query is being executed repeatedly against data that does not change that often. What can WWI to improve the performance of these types of queries? How does this approach work when the underlying data changes?
 
-    - They should consider result-set caching.
-    - Cache the results of a query in provisioned Azure Synapse SQL Pool storage. This enables interactive response times for repetitive queries against tables with infrequent data changes.
-    - The result-set cache persists even if the Azure Synapse SQL Pool is paused and resumed later.
-    - Query cache is invalidated and refreshed when underlying table data or query code changes.
-    - Result cache is evicted regularly based on a time-aware least recently used algorithm (TLRU).
+      They should consider result-set caching.
+
+      Cache the results of a query in provisioned Azure Synapse SQL Pool storage. This enables interactive response times for repetitive queries against tables with infrequent data changes.
+
+      The result-set cache persists even if the Azure Synapse SQL Pool is paused and resumed later.
+
+      The query cache is invalidated and refreshed when underlying table data or query code changes.
+
+      The result cache is evicted regularly based on a time-aware least recently used algorithm (TLRU).
 
 *Visualize*
 
 1. What product can WWI use to visualize their retail transaction data? Is it a separate tool that they need to install?
 
-   - Power BI. They can create, edit and view Power BI reports directly within the Azure Synapse Studio. They can also use Power BI Desktop to create and publish both datasets and reports that are then available within workspace.
+    Power BI. They can create, edit and view Power BI reports directly within the Azure Synapse Studio. They can also use Power BI Desktop to create and publish both datasets and reports that are then available within workspace.
 
 2. Can they use this same tool to visualize both the batch and streaming data in a single dashboard view?
 
-   - Yes. Power BI can be used to create dashboards that visualize both kinds of data.
+    Yes. Power BI can be used to create dashboards that visualize both kinds of data.
 
 3. With the product you recommend, do they need to load all the data into the data warehouse before they can create reports against it?
 
-   - No, they only need to load the data into Azure Storage. Using Azure Synapse SQL serverless and Power BI they can create reports against the data directly.
+    No, they only need to load the data into Azure Storage. Using Azure Synapse SQL serverless and Power BI they can create reports against the data directly.
 
 *Manage*
 
 1. In previous efforts, WWI systems struggled with their popularity. Exploratory queries that were not time sensitive would saturate the available resources and delay the execution of higher priority queries supporting critical reports. Explain how your solution helps to resolve this.
 
-    - WWI should configure Workload Management in Azure Synapse Analytics which serves to prevent this situation.
-    - It manages resources, ensures highly efficient resource utilization, and maximizes return on investment (ROI).
-    - The three pillars of Workload Management are:
+     WWI should configure Workload Management in Azure Synapse Analytics which serves to prevent this situation.
+
+     It manages resources, ensures highly efficient resource utilization, and maximizes return on investment (ROI).
+
+     The three pillars of Workload Management are:
       - Workload Classification – To assign a request to a workload group and set importance levels.
       - Workload Importance – To influence the order in which a request gets access to resources.
       - Workload Isolation – To reserve resources for a workload group.
 
 2. What does your solution provide to WWI to help them identify issues such as suboptimal table distribution, data skew, cache misses, tempdb contention and suboptimal plan selection?
 
-   - They can leverage the Azure Advisor recommendations.
+     They can leverage the Azure Advisor recommendations.
 
 3. WWI recognizes there is a balance between the data warehouse software staying up to date and when they can afford downtime that might result. How can they establish their preferences with your solution so they are never caught off guard with an upgrade?
 
-   - They should leverage maintenance windows, a feature of Azure Synapse Analytics. With this they can: 
+    They should leverage maintenance windows, a feature of Azure Synapse Analytics. With this they can: 
      - Choose a time window for upgrades.
      - Select a primary and secondary window within a seven-day period, where windows can be from 3 to 8 hours.
      - Receive 24-hour advance notification for maintenance events.
@@ -657,36 +685,46 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. How does your solution provide unified authentication, such as across SQL and Spark workloads?
 
-   - Azure Synapse Analytics uses Azure Active Directory (AAD) as its authentication mechanism. When a user logs into an Azure Synapse Analytics workspace, the active user's AAD credential is implicitly used to execute T-SQL queries on a provisioned Azure Synapse SQL Pool, to run notebooks in an Azure Synapse Spark pool and to access Power BI reports. This same AAD credential is also utilized in controlling access to the data stored within Azure Synapse SQL databases or stored within a hierarchical file system in Azure Storage (Azure Data Lake Store gen 2 or ADLS gen 2). By leveraging AAD, Azure Synapse Analytics allows for the centralized management of user identities.
+     Azure Synapse Analytics uses Azure Active Directory (AAD) as its authentication mechanism. When a user logs into an Azure Synapse Analytics workspace, the active user's AAD credential is implicitly used to execute T-SQL queries on a provisioned Azure Synapse SQL Pool, to run notebooks in an Azure Synapse Spark pool and to access Power BI reports. This same AAD credential is also utilized in controlling access to the data stored within Azure Synapse SQL databases or stored within a hierarchical file system in Azure Storage (Azure Data Lake Store Gen2 or ADLS Gen2). By leveraging AAD, Azure Synapse Analytics allows for the centralized management of user identities.
 
-2. How is access to data authorized for data stored in Azure Data Lake Store gen 2? In Azure Synapse SQL databases?
+2. How is access to data authorized for data stored in Azure Data Lake Store Gen2? In Azure Synapse SQL databases?
 
-   - **Authorization in ADLS gen2:** From an authorization standpoint, course grained access control can be applied at the container level in Azure Storage by specifying AAD roles. Furthermore, fine grained access control is enabled by setting POSIX ACLs at the folder level.
-   - **Authorization in databases:** Management of database permissions is performed by setting access permissions on Azure Active Directory groups and users, which are external to the database. Object level security allows you to control permissions on tables, views, stored procedures and functions.
+    **Authorization in ADLS Gen2:** From an authorization standpoint, course grained access control can be applied at the container level in Azure Storage by specifying AAD roles. Furthermore, fine grained access control is enabled by setting POSIX ACLs at the folder level.
+
+    **Authorization in databases:** Management of database permissions is performed by setting access permissions on Azure Active Directory groups and users, which are external to the database. Object level security allows you to control permissions on tables, views, stored procedures and functions.
 
 3. One of WWI's challenges is that while multiple departments might be able to query a given table, what data they should be allowed to see depends on their department or role within the company. How could your solution support this? You should suggest three options.
 
-   - WWI could achieve this in several ways using either Row Level Security, Column Level Security or Dynamic Data Masking. They might even benefit from all three being applied to the same table depending on their needs.
-   - **Row Level Security:** In Azure Synapse Analytics, tables in Azure Synapse SQL databases support Row Level Security (RLS). RLS enables you to implement restrictions on data row access. The access restriction logic is located in the database tier rather than away from the data in another application tier. The database system applies the access restrictions every time that data access is attempted from any tier. Think of RLS as effectively filtering out rows the user is not authorized to select, update or delete. This makes your security system more reliable and robust by reducing the surface area of your security system.
-   - **Columns Level Security:** In addition, tables in Azure Synapse SQL databases support Column Level Security (CLS). CLS enables you to control access to specific columns in a database table based on a user's group membership or execution context.
-   - **Dynamic Data Masking:** Alternately, if parts only parts of a field need to be displayed according to the users' group membership (such as displaying only a few characters of an email address), then WWI could use Dynamic Data Masking.
+     WWI could achieve this in several ways using either Row Level Security, Column Level Security or Dynamic Data Masking. They might even benefit from all three being applied to the same table depending on their needs.
+
+     **Row Level Security:** In Azure Synapse Analytics, tables in Azure Synapse SQL databases support Row Level Security (RLS). RLS enables you to implement restrictions on data row access. The access restriction logic is located in the database tier rather than away from the data in another application tier. The database system applies the access restrictions every time that data access is attempted from any tier. Think of RLS as effectively filtering out rows the user is not authorized to select, update or delete. This makes your security system more reliable and robust by reducing the surface area of your security system.
+
+     **Columns Level Security:** In addition, tables in Azure Synapse SQL databases support Column Level Security (CLS). CLS enables you to control access to specific columns in a database table based on a user's group membership or execution context.
+
+     **Dynamic Data Masking:** Alternately, if parts only parts of a field need to be displayed according to the users' group membership (such as displaying only a few characters of an email address), then WWI could use Dynamic Data Masking.
 
 4. Can the solution help WWI discover, track and remediate security misconfigurations and detect threats? How?
 
-   - There are two primary ways: using the SQL Vulnerability Assessment and with SQL Threat Detection.
-   - The SQL Vulnerability Assessment is an easy to use service that can help you discover, track, and remediate potential database vulnerabilities. It provides visibility into your database security state and allows constant improvements. In short, it:
+     There are two primary ways: using the SQL Vulnerability Assessment and with SQL Threat Detection.
+
+     The SQL Vulnerability Assessment is an easy to use service that can help you discover, track, and remediate potential database vulnerabilities. It provides visibility into your database security state and allows constant improvements. In short, it:
      - Runs a set of security checks that identify security misconfigurations.
      - Allows setting a security baseline that customize the results to suit your environment.
      - Provides a clear report which is very helpful for security audits.
-   - The SQL Vulnerability Assessment is run from the Azure Portal. It takes a few seconds to run, and is entirely read-only. It does not make any changes to your database.
-   - When the scan completes, you will presented with a report. The report presents an overview of your security state; how many issues were found, and their respective severities. Results include warnings on deviations from best practices, as well as a snapshot of your security-related settings, such as database principals and roles and their associated permissions. The scan report also provides a map of sensitive data discovered in your database, and includes recommendations of the built-in methods available to protect it.
-   - From the report you can drill-down to each failed result to understand the impact of the finding, and why each security check failed. You can use the actionable remediation information provided by the report to resolve the issue, for example, by running a generated remediation script in a new query editor window.
-   - As you review your assessment results, you can mark specific results as being an acceptable Baseline in your environment. The baseline is essentially a customization of how the results are reported. Results that match the baseline are considered as passing in subsequent scans.
-   - SQL Threat Detection allows you to respond to unusual and harmful attempts to breach your database, including detecting potential SQL injection attacks, unusual access and data exfiltration activities and emailing actionable alerts to investigate and remediate. It is configured in the Azure Portal.
+ 
+     The SQL Vulnerability Assessment is run from the Azure Portal. It takes a few seconds to run, and is entirely read-only. It does not make any changes to your database.
+
+    When the scan completes, you will presented with a report. The report presents an overview of your security state; how many issues were found, and their respective severities. Results include warnings on deviations from best practices, as well as a snapshot of your security-related settings, such as database principals and roles and their associated permissions. The scan report also provides a map of sensitive data discovered in your database, and includes recommendations of the built-in methods available to protect it.
+
+    From the report you can drill-down to each failed result to understand the impact of the finding, and why each security check failed. You can use the actionable remediation information provided by the report to resolve the issue, for example, by running a generated remediation script in a new query editor window.
+
+    As you review your assessment results, you can mark specific results as being an acceptable Baseline in your environment. The baseline is essentially a customization of how the results are reported. Results that match the baseline are considered as passing in subsequent scans.
+
+    SQL Threat Detection allows you to respond to unusual and harmful attempts to breach your database, including detecting potential SQL injection attacks, unusual access and data exfiltration activities and emailing actionable alerts to investigate and remediate. It is configured in the Azure Portal.
 
 5. Can WWI use this same solution to monitor for sensitive information by enabling them to discover, classify and protect and track access to such data?
 
-   - Yes, by using SQL Data Discovery and Classification, which:
+    Yes, by using SQL Data Discovery and Classification, which:
      - Automatically discovers columns containing potentially sensitive data.
      - Provides a simple way to review and apply the classification recommendations through the Azure portal.
      - Persists sensitive data labels in the database (as metadata attributes), audits and detects access to the sensitive data. It includes a built-in set of labels and information types; however users can chose to define custom labels across Azure tenant using Azure Security Center.
@@ -694,36 +732,36 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 6. From a network security standpoint, how should your solution be secured?
 
-   - WWI should deploy their Azure Synapse Analytics workspace within a managed workspace Virtual Network (VNet), and then use managed private endpoints to establish a private link to Azure resources. By using a private link, traffic between their VNet and Azure Synapse Analytics workspace traverses entirely over the Microsoft backbone network, which protects against data exfiltration risks. You establish a private link to a resource by creating a private endpoint. Private endpoint uses a private IP address from the VNet to effectively bring the service "into" the VNet. Azure Synapse Analytics creates two Managed private endpoints automatically when the Azure Synapse workspace is created within a managed VNet.
+    WWI should deploy their Azure Synapse Analytics workspace within a managed workspace Virtual Network (VNet), and then use managed private endpoints to establish a private link to Azure resources. By using a private link, traffic between their VNet and Azure Synapse Analytics workspace traverses entirely over the Microsoft backbone network, which protects against data exfiltration risks. You establish a private link to a resource by creating a private endpoint. Private endpoint uses a private IP address from the VNet to effectively bring the service "into" the VNet. Azure Synapse Analytics creates two Managed private endpoints automatically when the Azure Synapse workspace is created within a managed VNet.
 
 ## Checklist of preferred objection handling
 
-1. WWI understands that Azure offers several services with overlapping capabilities- they do not want to spend the time stitching them together to get to the desired analytics solution.
+1. WWI understands that Azure offers several services with overlapping capabilities.  They do not want to spend the time stitching them together to get to the desired analytics solution.
 
    - Azure Synapse Analytics was designed to address exactly this situation and enables customers to quickly get to creating business value from their analytics instead of spending time on plumbing infrastructure connecting disparate services.
 
-2. They have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
+2. WWI have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
 
    - Azure Synapse Analytics is Microsoft's answer to this challenge, and is designed for supporting fast loads of massive datasets.
 
-3. Can they really minimize the number of disparate services they use across ingest, transformation, querying and storage, so that their team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
+3. Is it really possible to minimize the number of disparate services they use across ingest, transformation, querying and storage, so that WWI team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
 
    - Yes, Azure Synapse Analytics provides an integrated environment that does exactly this.
 
-4. They have heard of serverless querying, does your solution offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting their dashboards or reports?
+4. WWI have heard of serverless querying, does Azure offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting WWI dashboards or reports?
 
    - Azure Synapse Analytics support serverless querying via the serverless SQL endpoint.
    - Azure Synapse SQL serverless is an always available SQL endpoint that provides T-SQL querying over high scale data in Azure Storage, and is ideal for ad hoc or bursty workloads.
    - Supports data in various formats (Parquet, CSV, JSON)
    - It would be appropriate for dashboards and reports, as it supports Power BI and can be used refresh dashboard datasets. It is also appropriate for basic data discovery and exploration and supporting "single query ETL" that  transforms Azure Storage based data in a massively parallel fashion.
 
-5. If their solution provides serverless querying, are they prevented from using pre-allocated query resources?
+5. If Azure provides serverless querying, does selecting serverless remove the option of using pre-allocated query resources?
 
    - No. This is a unique differentiator of Azure Synapse Analytics. Within one Azure Synapse Analytics workspace, they can have pre-provisioned Azure Synapse SQL Pools, and also have serverless querying using the Azure Synapse SQL serverless endpoint.
 
-6. Is my data protected at rest and do I have control over the keys used to encrypt it?
+6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
-   - For data stored in Azure Synapse SQL databases as well as data stored in Azure Storage (including Azure Data Lake Store gen 2), Azure Synapse Analytics supports transparent data encryption (TDE), which means all data is encrypted when written to disk and decrypted when read. When it comes to the keys used for encryption and decryption, TDE provides the option of using service managed keys that are supplied by Microsoft, or user managed keys that are provided by the customer and are stored securely in Azure Key Vault.
+   - For data stored in Azure Synapse SQL databases as well as data stored in Azure Storage (including Azure Data Lake Store Gen2), Azure Synapse Analytics supports transparent data encryption (TDE), which means all data is encrypted when written to disk and decrypted when read. When it comes to the keys used for encryption and decryption, TDE provides the option of using service managed keys that are supplied by Microsoft, or user managed keys that are provided by the customer and are stored securely in Azure Key Vault.
 
 ## Customer quote (to be read back to the attendees at the end)
 

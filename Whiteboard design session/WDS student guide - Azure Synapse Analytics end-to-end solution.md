@@ -38,16 +38,19 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Step 3: Present the solution](#step-3-present-the-solution)
   - [Wrap-up](#wrap-up)
   - [Additional references](#additional-references)
+  - [Additional references](#additional-references-1)
 
 <!-- /TOC -->
 
 # Azure Synapse Analytics end-to-end solution whiteboard design session student guide
 
-## Abstract and learning objectives 
+## Abstract and learning objectives
 
-This workshop will challenge students to know about the breadth of functionality available within Azure Synapse Analytics, as well to learn how to best configure a comprehensive advanced analytics solution for an enterprise customer in the retail space.
+In this whiteboard design session, you will work in a group to look at the process of designing an end-to-end solution using Azure Synapse Analytics. The design session will cover data loading, data preparation, data transformation and data serving, along with performing machine learning and handling of both batch and real-time data.
 
-## Step 1: Review the customer case study 
+At the end of this whiteboard design session, you will be better able to design and build a complete end-to-end advanced analytics solution using Azure Synapse Analytics.
+
+## Step 1: Review the customer case study
 
 **Outcome**
 
@@ -55,14 +58,13 @@ Analyze your customer's needs.
 
 Timeframe: 15 minutes
 
-Directions: With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
+Directions:  With all participants in the session, the facilitator/SME presents an overview of the customer case study along with technical tips.
 
-1.  Meet your table participants and trainer.
+1. Meet your table participants and trainer.
 
-2.  Read all of the directions for steps 1-3 in the student guide.
+2. Read all of the directions for steps 1-3 in the student guide.
 
-3.  As a table team, review the following customer case study.
-
+3. As a table team, review the following customer case study.
 
 ### Customer situation
 
@@ -96,11 +98,11 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 4. Enable business analysts and data science/data engineering teams to share a single source of truth.
 
-5. They would like like to minimize the number of disparate services they use across ingest, transformation, querying and storage, so that their team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring.
+5. Minimize the number of disparate services they use across ingest, transformation, querying and storage, so that teams of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring.
 
-6. They prefer to accomplish this working within a single collaborative environment.
+6. Work within a single collaborative environment.
 
-7. They have concerns about performance, and want to make sure they can understand the core approaches they should take to ensure the best performance of the solution recommended.
+7. Concerned about performance, must make sure core approaches for best performance of the solution are well understood.
 
 8. Need a solution that provides a consistent security model across all components.
 
@@ -108,15 +110,15 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 1. WWI understands that Azure offers several services with overlapping capabilities.  They do not want to spend the time stitching them together to get to the desired analytics solution.
 
-2. They have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
+2. WWI have seen demos from competing systems that claim to load massive datasets in seconds. Does Azure offer such a solution?
 
-3. Can they really minimize the number of disparate services they use across ingest, transformation, querying and storage, so that their team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
+3. Is it really possible to minimize the number of disparate services they use across ingest, transformation, querying and storage, so that WWI team of data engineers, data scientists and database administrators can master one tool, and can build shared best practices for development, management and monitoring?
 
-4. They have heard of serverless querying, does your solution offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting their dashboards or reports?
+4. WWI have heard of serverless querying, does Azure offer this? Does it support querying the data at the scale of WWI and what formats does it support? Would this be appropriate for supporting WWI dashboards or reports?
 
-5. If their solution provides serverless querying, are they prevented from using pre-allocated query resources?
+5. If Azure provides serverless querying, does selecting serverless remove the option of using pre-allocated query resources?
 
-6. Is my data protected at rest and do I have control over the keys used to encrypt it?
+6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
 ### Infographic for common scenarios
 
@@ -190,6 +192,8 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
     - Their data engineers sometimes use temporary staging tables in their data preparation.
 
+    - They have lookup tables that range from several hundred MBs to 1.5 GBs
+
 7. Some of their data contains columns in the JSON format, how could they flatten these hierarchical fields to a tabular structure?
 
 8. What approach can they use to update the JSON data?
@@ -210,7 +214,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. In previous efforts, WWI systems struggled with their own popularity. Exploratory queries that were not time sensitive would saturate the available resources and delay the execution of higher priority queries supporting critical reports. Explain how your solution helps to resolve this.
 
-2. What does your solution provide to WWI to help them identify issues such as suboptimal table distribution, data skew, cache misses, `tempdb` contention and suboptimal plan selection?
+2. What does your solution provide to WWI to help them identify issues such as suboptimal table distribution, data skew, cache misses, tempdb contention and suboptimal plan selection?
 
 3. WWI recognizes there is a balance between the data warehouse software staying up to date and when they can afford downtime that might result. How can they establish their preferences with your solution so they are never caught off guard with an upgrade?
 
@@ -218,7 +222,7 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 1. How does your solution provide unified authentication, such as across SQL and Spark workloads?
 
-2. How is access to data authorized for data stored in Azure Data Lake Store gen 2? In Azure Synapse SQL databases?
+2. How is access to data authorized for data stored in Azure Data Lake Store Gen2? In Azure Synapse SQL databases?
 
 3. One of WWI's challenges is that while multiple departments might be able to query a given table, what data they should be allowed to see depends on their department or role within the company. How could your solution support this? You should suggest three options.
 
@@ -252,30 +256,32 @@ Timeframe: 30 minutes
 
 Directions:
 
-1.  Pair with another table.
+1. Pair with another table.
 
-2.  One table is the Microsoft team and the other table is the customer.
+2. One table is the Microsoft team and the other table is the customer.
 
-3.  The Microsoft team presents their proposed solution to the customer.
+3. The Microsoft team presents their proposed solution to the customer.
 
-4.  The customer makes one of the objections from the list of objections.
+4. The customer makes one of the objections from the list of objections.
 
-5.  The Microsoft team responds to the objection.
+5. The Microsoft team responds to the objection.
 
-6.  The customer team gives feedback to the Microsoft team.
+6. The customer team gives feedback to the Microsoft team.
 
-7.  Tables switch roles and repeat Steps 2-6.
+7. Tables switch roles and repeat Steps 2-6.
 
-##  Wrap-up 
+## Wrap-up
 
 Timeframe: 15 minutes
 
 Directions: Tables reconvene with the larger group to hear the facilitator/SME share the preferred solution for the case study.
 
-##  Additional references
+## Additional references
 
-|    |            |
-|----------|:-------------:|
+## Additional references
+
+|                                 |                                                                                                    |
+| ------------------------------- | :------------------------------------------------------------------------------------------------: |
 | **Description** | **Links** |
 | What is Azure Synapse Analytics  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is  |
 | Cheat sheet for Azure Synapse Analytics solutions  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/cheat-sheet  |
