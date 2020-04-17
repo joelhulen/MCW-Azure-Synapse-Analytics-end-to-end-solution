@@ -278,8 +278,6 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Additional references
 
-## Additional references
-
 |                               |                                                                                                |
 |-------------------------------|------------------------------------------------------------------------------------------------|
 | **Description** | **Links** |
