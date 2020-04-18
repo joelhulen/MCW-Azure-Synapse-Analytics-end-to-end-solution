@@ -246,7 +246,7 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 ### Infographic for common scenarios
 
-![Azure Synapse Analytics Overview](media/infographic.png)
+![Overview of Azure Synapse Analytics features and capabilities. Showing how one solution provides the user experience with Azure Synapse Studio, a platform for processing data with SQL and Spark, and integrated management of the data lake.](media/infographic.png "Azure Synapse Analytics Overview")
 
 ## Step 2: Design a proof of concept solution
 
@@ -402,8 +402,8 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 
 ## Additional references
 
-|                                 |                                                                                                    |
-| ------------------------------- | :------------------------------------------------------------------------------------------------: |
+|                               |                                                                                                |
+|-------------------------------|------------------------------------------------------------------------------------------------|
 | **Description** | **Links** |
 | What is Azure Synapse Analytics  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is  |
 | Cheat sheet for Azure Synapse Analytics solutions  | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/cheat-sheet  |
@@ -418,7 +418,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | Result set caching |  https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/performance-tuning-result-set-caching?view=sql-server-ver15 |
 | Overview of Tables in Synapse Analytics | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-overview?view=sql-server-ver15 |
 | Workload Management | https://docs.microsoft.com/en-us/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-workload-management?view=sql-server-ver15 |
-| Intro to Azure Data Lake Store gen2 | https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction |
+| Intro to Azure Data Lake Store Gen2 | https://docs.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction |
 | Azure Stream Analytics | https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-introduction |
 
 # Azure Synapse Analytics end-to-end solution whiteboard design session trainer guide
@@ -487,15 +487,15 @@ The primary audience is the business decision makers and technology decision mak
 
     The serving layer can consist of a dedicated Azure Synapse SQL Pool to provide pre-provisioned compute capacity to serve both data from the relational data warehouse or data sourced from the data lake. Additionally, the serving layer can use Azure Synapse SQL serverless to provide ad-hoc compute capacity for querying data stored in the data lake. Either of these serving options can be used by Power BI reports created within Azure Synapse Analytics, or by external applications. The important take away from this architecture is that all of the components shown are completely managed within Azure Synapse Analytics.
 
-    ![High level architecture](media/preferred-solution.png)
+    ![Diagram illustrating the high level process for the "cold path" of the data pipeline architecture described in the text above.](media/preferred-solution.png "Cold path of the data pipeline architecture")
     
     The following diagram illustrates how they could handle the streaming data, the "hot path". Twitter tweet data needs to be pulled using a WebJob. This WebJob would load the tweets into Event Hubs so that they could be processed reliably using Stream Analytics. Stream Analytics can be used both to archive all tweets to the data lake for offline or batch analysis using Azure Synapse SQL provisioned within Azure Synapse Analytics, as well as to send live data to Power BI reports for real-time dashboards and reports. The in-store IoT sensors could ingest their data into IoT Hub directly, and by integrating with IoT Hub also benefit from the device management capabilities that IoT Hub enables. Ultimately this data would also be processed by another Stream Analytics job and served in the same way as the tweets.
 
-    ![High level architecture](media/preferred-solution-streaming.png)
+    ![Diagram illustrating the process for handling streaming data, the "hot path" as described in the text above.](media/preferred-solution-streaming.png "Hot path approach to streaming data")
 
     The following diagram illustrates the approach the Azure Synapse Analytics enables for WWI with regards to machine learning. WWI could train their machine learning models using notebooks run within Azure Machine Learning or Azure Synapse Spark. They could use their machine learning framework of choice to do so. Within this notebook they would convert the model into the ONNX format and then upload the model to Azure Storage. From there, they would run a T-SQL script in Azure Synapse SQL to load the model into a table in the database. After this, they can use the model within T-SQL scripts running Azure Synapse SQL by loading the model from the table, and using it with the Predict function to score data sourced from a table in the database. The scored results could then be used directly or be inserted into a target table for later querying of the predictions.
 
-    ![High level architecture](media/preferred-solution-machine-learning.png)
+    ![Diagram illustrating the machine learning approach as described in the text above.](media/preferred-solution-machine-learning.png "Azure Synapse Analytics model in regards to machine learning")
 
 *Ingest & Store*
 
@@ -765,6 +765,6 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 
 ## Customer quote (to be read back to the attendees at the end)
 
-Microsoft really hit the mark with Azure Synapse Analytics- it gave us the integrated, scalable and performant analytics solution that we sought, and has enabled us to deliver impressive improvements to the business across all of our stores.
+"Microsoft really hit the mark with Azure Synapse Analytics- it gave us the integrated, scalable and performant analytics solution that we sought, and has enabled us to deliver impressive improvements to the business across all of our stores."
 
 -- Peter Guerin, Chief Technical Officer (CTO), World Wide Importers.
