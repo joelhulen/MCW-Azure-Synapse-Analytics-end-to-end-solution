@@ -118,6 +118,8 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
+7. Azure Databricks and Azure Synapse Analytics seem to have overlapping capabilities, how does one choose between them?
+
 ### Infographic for common scenarios
 
 ![Overview of Azure Synapse Analytics features and capabilities. Showing how one solution provides the user experience with Azure Synapse Studio, a platform for processing data with SQL and Spark, and integrated management of the data lake.](media/infographic.png "Azure Synapse Analytics Overview")

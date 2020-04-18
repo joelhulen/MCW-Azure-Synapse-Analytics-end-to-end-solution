@@ -244,6 +244,8 @@ To bring their entire operation into perspective, Wide World Importers would lik
 
 6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
+7. Azure Databricks and Azure Synapse Analytics seem to have overlapping capabilities, how does one choose between them?
+
 ### Infographic for common scenarios
 
 ![Overview of Azure Synapse Analytics features and capabilities. Showing how one solution provides the user experience with Azure Synapse Studio, a platform for processing data with SQL and Spark, and integrated management of the data lake.](media/infographic.png "Azure Synapse Analytics Overview")
@@ -762,6 +764,14 @@ Their sales transaction dataset exceeds a billion rows. For their downstream rep
 6. Would data be protected at rest and are there controls over the keys used to encrypt it?
 
    - For data stored in Azure Synapse SQL databases as well as data stored in Azure Storage (including Azure Data Lake Store Gen2), Azure Synapse Analytics supports transparent data encryption (TDE), which means all data is encrypted when written to disk and decrypted when read. When it comes to the keys used for encryption and decryption, TDE provides the option of using service managed keys that are supplied by Microsoft, or user managed keys that are provided by the customer and are stored securely in Azure Key Vault.
+
+7. Azure Databricks and Azure Synapse Analytics seem to have overlapping capabilities, how does one choose between them?
+
+    - For customers primarily looking for a Data Warehousing solution, we recommend Azure Synapse Analytics.
+    - For customers primarily looking for a Spark solution and don’t have data warehousing needs, we recommend Azure Databricks. In case of Spark based ML scenarios, we also recommend using Azure Machine Learning from within Azure Databricks for experiment tracking, automated machine learning and MLOPs.
+    - For customers who are heavily investing in Spark and have data warehousing needs, we recommend both Azure Databricks and Azure Synapse.
+
+
 
 ## Customer quote (to be read back to the attendees at the end)
 
